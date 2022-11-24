@@ -1,16 +1,21 @@
 # This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
+from telegram.ext import (Updater, CommandHandler)
+import os
+TOKEN=os.getenv("UDEMY_BOT_TOKEN")
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def start_handler(update,context):
+    update.message.reply_text(f"Hello Creator! ")
+if __name__ == '__main__':
+    # Create the Updater and pass it your bot's token.
+    updater = Updater(TOKEN,use_context=True)
+
+    # Get the dispatcher to register handlers
+    dispatcher = updater.dispatcher
+
+    # on different commands - answer in Telegram
+
+    dispatcher.add_handler(CommandHandler("start", start_handler))
+
+    # Start the Bot
+    updater.start_polling()
